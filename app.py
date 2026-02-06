@@ -163,7 +163,6 @@ with st.sidebar:
     st.markdown("<div class='hcl-side'>", unsafe_allow_html=True)
     st.markdown("### Quick Actions")
     PROMPTS = {
-        PROMPTS = {
     # Core analysis
     "Analyze software license agreement":
         "I have a software license agreement that needs comprehensive analysis. "
