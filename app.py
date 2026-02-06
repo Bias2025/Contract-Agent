@@ -163,13 +163,60 @@ with st.sidebar:
     st.markdown("<div class='hcl-side'>", unsafe_allow_html=True)
     st.markdown("### Quick Actions")
     PROMPTS = {
-        "Analyze software license agreement": "I have a software license agreement that needs comprehensive analysis. Please examine it for key terms, obligations, risks, and provide recommendations for approval or rejection. Include details on licensing model, restrictions, compliance requirements, and any red flags.",
-        "Identify compliance risks and red flags": "Please identify all compliance risks and red flags in the software license agreement. Focus on potential legal, financial, and operational risks that could impact our organization. Highlight any problematic clauses that need attention.",
-        "Extract key legal and business terms": "Extract and summarize all key legal and business terms from this software license agreement. Include pricing, payment terms, duration, termination conditions, liability clauses, intellectual property rights, and data handling provisions.",
-        "Review liability & indemnification": "Review and analyze all liability and indemnification clauses in this software license agreement. Assess the risk exposure and provide recommendations on acceptable vs. problematic liability terms.",
-        "Analyze data protection requirements": "Analyze the data protection and privacy requirements in this software license agreement. Review data handling provisions, security requirements, and compliance with regulations like GDPR, CCPA, etc.",
-        "Approval / rejection recommendation": "Based on the software license agreement provided, please give a clear approval or rejection recommendation. Include your reasoning, risk assessment, and any conditions or modifications that would make the license acceptable."
-    }
+        PROMPTS = {
+    # Core analysis
+    "Analyze software license agreement":
+        "I have a software license agreement that needs comprehensive analysis. "
+        "Please examine it for key terms, obligations, risks, and provide recommendations "
+        "for approval or rejection. Include details on licensing model, restrictions, "
+        "compliance requirements, and any red flags.",
+
+    "Identify compliance risks and red flags":
+        "Please identify all compliance risks and red flags in the software license agreement. "
+        "Focus on potential legal, financial, and operational risks that could impact our organization. "
+        "Highlight any problematic clauses that need attention.",
+
+    "Extract key legal and business terms":
+        "Extract and summarize all key legal and business terms from this software license agreement. "
+        "Include pricing, payment terms, duration, termination conditions, liability clauses, "
+        "intellectual property rights, and data handling provisions.",
+
+    "Review liability & indemnification":
+        "Review and analyze all liability and indemnification clauses in this software license agreement. "
+        "Assess the risk exposure and provide recommendations on acceptable vs. problematic liability terms.",
+
+    "Analyze data protection requirements":
+        "Analyze the data protection and privacy requirements in this software license agreement. "
+        "Review data handling provisions, security requirements, and compliance with regulations "
+        "like GDPR, CCPA, etc.",
+
+    "Approval / rejection recommendation":
+        "Based on the software license agreement provided, please give a clear approval or rejection "
+        "recommendation. Include your reasoning, risk assessment, and any conditions or modifications "
+        "that would make the license acceptable.",
+
+    # --- DEMO / ADVANCED REASONING ---
+    "Conflict detection (SAP audit rights)":
+        "Are there any conflicting audit rights in the SAP agreements or amendments? "
+        "Identify each conflicting clause, cite the relevant documents, and explain the nature of the conflict.",
+
+    "Precedence reasoning (SAP audit terms)":
+        "Which SAP audit terms apply, and why? "
+        "Analyze order-of-precedence language across the base agreement and amendments, "
+        "and explain any unresolved ambiguity.",
+
+    "Calculation (SAP first-year cost)":
+        "What is the total first-year cost of the SAP licenses including maintenance? "
+        "Show your calculations and clearly state any assumptions.",
+
+    "Risk analysis (SAP indirect access)":
+        "What is the financial risk if SAP finds indirect access during an audit? "
+        "Consider penalties, retroactive license fees, and maintenance exposure.",
+
+    "Cross-license comparison (pricing escalation)":
+        "Compare pricing escalation risk between the SAP license and the GitHub Copilot license. "
+        "Identify escalation clauses, caps, compounding effects, and long-term cost exposure."
+   }
     selected = st.selectbox("Insert a standard prompt", ["—"] + list(PROMPTS.keys()))
     if selected != "—":
         st.session_state["draft_prompt"] = PROMPTS[selected]
